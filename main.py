@@ -126,7 +126,7 @@ if not os.path.exists(subcmd[0]):
     usage('error: unknown command "%s"' % subcmd_name)
 
 already_fixed = atoi(os.environ.get('BUP_FORCE_TTY'))
-if subcmd_name in ['mux', 'ftp', 'help']:
+if subcmd_name in ['mux', 'ftp', 'help', 'cron']:
     already_fixed = True
 fix_stdout = not already_fixed and os.isatty(1)
 fix_stderr = not already_fixed and os.isatty(2)
