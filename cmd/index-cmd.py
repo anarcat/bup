@@ -87,7 +87,11 @@ def update_index(top, excluded_paths, exclude_rxs):
                                                  exclude_rxs=exclude_rxs):
         if opt.verbose>=2 or (opt.verbose==1 and stat.S_ISDIR(pst.st_mode)):
             sys.stdout.write('%s\n' % path)
-            sys.stdout.flush()
+            try:
+                sys.stdout.flush()
+            except IOError:
+               # probably stdout is closed, ignore
+               pass
             elapsed = time.time() - index_start
             paths_per_sec = total / elapsed if elapsed else 0
             qprogress('Indexing: %d (%d paths/s)\r' % (total, paths_per_sec))
